@@ -2,6 +2,7 @@ package controller;
 
 import model.Client;
 
+import java.io.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,27 +14,40 @@ public class ClientController {
     private static ClientController INSTANCE =  null;
     // instancias de todos os outros clientes
     private List<Client> lojas;
-    public ClientController() throws AlreadyBoundException, RemoteException {
+
+    public ClientController() throws AlreadyBoundException, IOException {
         this.lojas = new ArrayList<Client>();
-        this.lojas.add(new Client());
-        this.lojas.add(new Client());
-        this.lojas.add(new Client());
+        this.lojas.add(new Client("Mexicanas")); //Mexicanas
+        this.lojas.add(new Client("Amazonas")); // Amazonas
+        this.lojas.add(new Client("Mazza")); // Mazza
         Registry registry = LocateRegistry.createRegistry(5098);
-        registry.bind("loja1",this.lojas.get(0));
-        registry.bind("loja2",this.lojas.get(1));
-        registry.bind("loja3",this.lojas.get(2));
+        registry.bind("Mexicanas",this.lojas.get(0));//Mexicanas
+        registry.bind("Amazonas",this.lojas.get(1)); //Amazonas
+        registry.bind("Mazza",this.lojas.get(2)); //Mazza
+
+        readFile("Mexicanas.csv",this.lojas.get(0));
+        readFile("Amazonas.csv",this.lojas.get(1));
+        readFile("Mazza.csv",this.lojas.get(2));
+
     }
 
 
-
-
-
-
-    public ClientController getInstance() throws AlreadyBoundException, RemoteException {
-        if(this.INSTANCE==null){
-            this.INSTANCE = new ClientController();
+    private void readFile(String nomeArq, Client loja) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("src/controller/"+nomeArq)));
+        String linha = null;
+        while((linha = reader.readLine())!=null){
+            String[] dadosUsuario = linha.split(";");
+            loja.addProduto(dadosUsuario[0],Integer.parseInt(dadosUsuario[1]));
         }
-        return this.INSTANCE;
+        reader.close();
+
+    }
+
+    public static ClientController getInstance() throws AlreadyBoundException, IOException {
+        if(INSTANCE==null){
+            INSTANCE = new ClientController();
+        }
+        return INSTANCE;
     }
 
 }

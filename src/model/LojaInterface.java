@@ -8,10 +8,10 @@ import java.rmi.RemoteException;
 
 public interface LojaInterface extends Remote {
 
-    public boolean removerItem(int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
+    public boolean removerItem(String nome, int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
     public boolean  adicionarItem(int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
     public int getValue() throws RemoteException;
-    public boolean removerEstoque(int quantidade) throws RemoteException;
+    public boolean removerEstoque(String nome, int quantidade) throws RemoteException;
 
 
 }

@@ -7,8 +7,8 @@ import java.rmi.RemoteException;
 
 public interface ClientInterface extends Remote {
 
-    public void removerItem(int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
-    public void  adicionarItem(int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
+    public void removerItem(String nome, int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
+    public void  adicionarItem(String nome, int quantidade) throws RemoteException, MalformedURLException, NotBoundException;
 
 
 }

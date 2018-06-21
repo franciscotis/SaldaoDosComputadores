@@ -1,22 +1,31 @@
 package model;
 
-import java.net.MalformedURLException;
+import controller.ClientController;
+
+import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
+import java.util.Scanner;
 
 public class ClientView{
 
-    public static void main(String[] args) throws AlreadyBoundException, RemoteException, MalformedURLException, NotBoundException {
-        Client c1 = new Client();
-        Registry registry = LocateRegistry.createRegistry(5098);
-        registry.bind("client",c1);
+    public static void main(String[] args) throws AlreadyBoundException, IOException, NotBoundException {
+        ClientController cont = ClientController.getInstance();
         LojaInterface loja = (LojaInterface) Naming.lookup("rmi://localhost:5099/loja");
-        System.out.println(loja.removerItem(10));
-        System.out.println(c1.getQuantidade());
+        int escolha = 0;
+        int choice;
+        Scanner teclado = new Scanner(System.in);
+        while(escolha==0){
+            System.out.println("Escolha 1");
+            choice = teclado.nextInt();
+            teclado.nextLine();
+            if(choice==1){
+                System.out.println("Escolha oq deseja fazer ");
+                choice = teclado.nextInt();
+                teclado.nextLine();
+                loja.removerItem("Monitor",choice);
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class Servidor {
+public class Servidor { // Servidor da loja principal - > Saldao Dos Computadores
 
     public static void main(String[] args) throws RemoteException, AlreadyBoundException, MalformedURLException, NotBoundException {
         Registry registry = LocateRegistry.createRegistry(5099);

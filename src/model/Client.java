@@ -1,24 +1,56 @@
 package model;
 
+import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-public class Client extends UnicastRemoteObject implements ClientInterface {
-    public Client() throws RemoteException, AlreadyBoundException {
-    }
-    private int quantidade = 100;
-
-
-    public void adicionarItem(int qtd){
-        quantidade+=qtd;
-    }
-
-    public void removerItem(int qtd){
-        quantidade-=qtd;
+public class Client extends UnicastRemoteObject implements ClientInterface { //Classes das outras lojas ex Americanas, Bom Preço etc
+    List<Produto> produtos;
+    String nome;
+    public Client(String nome) throws RemoteException, AlreadyBoundException {
+        this.produtos = new LinkedList<>();
+        this.nome = nome;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+
+    public void adicionarItem(String nome,int qtd){
+        for(Produto a : this.produtos){
+            if(a.getNome().equals(nome)){
+                a.adicionarQuantidade(qtd);
+            }
+        }
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void removerItem(String nome, int qtd){
+        for(Produto a : this.produtos){
+            if(a.getNome().equals(nome)){
+                a.retirarQuantidade(qtd);
+                System.out.println(this.getNome()+ "- > "+a.getNome()+" QTD"+a.getQuantidade());
+
+            }
+        }
+    }
+
+    public int getQuantidade(String nome) {
+        for(Produto a : this.produtos){
+            if(a.getNome().equals(nome)){
+                return a.getQuantidade();
+            }
+        }
+        return -1;
+    }
+
+    public void addProduto(String nome, int qtd){
+        this.produtos.add(new Produto(nome,qtd));
     }
 }
