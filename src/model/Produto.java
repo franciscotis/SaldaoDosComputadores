@@ -1,9 +1,11 @@
 package model;
 
-public class Produto {
+import java.io.Serializable;
+
+public class Produto implements Serializable{
     private String nome;
     private int quantidade;
-
+    private static final long serialVersionUID = 1L;
     public Produto(String nome, int quantidade) {
         this.nome = nome;
         this.quantidade = quantidade;
@@ -26,6 +28,7 @@ public class Produto {
         this.quantidade+=qtd;
     }
 
-
-
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 }

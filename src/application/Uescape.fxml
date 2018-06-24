@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UescapeController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/UescapePage.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="mexicanas" layoutX="-5.0" layoutY="313.0" onAction="#mexicanas" prefHeight="89.0" prefWidth="208.0" style="-fx-text-fill: transparent;" />
+      <JFXButton fx:id="mazza" layoutY="224.0" onAction="#mazza" prefHeight="89.0" prefWidth="200.0" style="-fx-text-fill: transparent;" />
+      <JFXButton fx:id="amazonas" layoutX="3.0" layoutY="135.0" onAction="#amazonas" prefHeight="89.0" prefWidth="200.0" style="-fx-text-fill: transparent;" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SaldaoDosComputadores:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SaldaoDosComputadores_jar</output-path>
+    <root id="archive" name="SaldaoDosComputadores.jar">
+      <element id="module-output" name="SaldaoDosComputadores" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/dependences/jfoenix-9.0.4.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/dependences/jfoenix-9.0.4.jar" />
+    </root>
+  </artifact>
+</component>

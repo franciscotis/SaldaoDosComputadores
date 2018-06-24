@@ -35,7 +35,7 @@ public class Client extends UnicastRemoteObject implements ClientInterface { //C
         for(Produto a : this.produtos){
             if(a.getNome().equals(nome)){
                 a.retirarQuantidade(qtd);
-                System.out.println(this.getNome()+ "- > "+a.getNome()+" QTD"+a.getQuantidade());
+                System.out.println(this.getNome()+ " - > "+a.getNome()+" QTD "+a.getQuantidade());
 
             }
         }
@@ -52,5 +52,17 @@ public class Client extends UnicastRemoteObject implements ClientInterface { //C
 
     public void addProduto(String nome, int qtd){
         this.produtos.add(new Produto(nome,qtd));
+    }
+
+    public void editarProduto(String nome, int qtd){
+        for(Produto p : this.produtos){
+            if(p.getNome().equals(nome)){
+                p.setQuantidade(qtd);
+            }
+        }
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 }

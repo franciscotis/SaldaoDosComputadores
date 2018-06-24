@@ -5,21 +5,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1350.0" style="-fx-background-image: url('file:..\..\img\CasasAmazonas.png');" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MazzaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MazzaController">
    <children>
       <ImageView fitHeight="701.0" fitWidth="1351.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../img/Mazza.png" />
+            <Image url="@../img/Mazza.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="monitor" layoutY="325.0" prefHeight="261.0" prefWidth="216.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="notebook" layoutX="212.0" layoutY="329.0" prefHeight="243.0" prefWidth="214.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="tablet" layoutX="436.0" layoutY="338.0" prefHeight="239.0" prefWidth="220.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="estabilizador" layoutX="654.0" layoutY="323.0" prefHeight="251.0" prefWidth="216.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="zenfone" layoutX="880.0" layoutY="309.0" prefHeight="265.0" prefWidth="212.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="iphone" layoutX="1103.0" layoutY="314.0" prefHeight="253.0" prefWidth="236.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="tablet" layoutX="-1.0" layoutY="137.0" prefHeight="141.0" prefWidth="1354.0" style="-fx-text-fill: transparent;" text="Button" />
-      <JFXButton fx:id="iphtabletone" layoutY="590.0" prefHeight="107.0" prefWidth="1354.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="monitor" layoutY="325.0" onAction="#monitor" prefHeight="261.0" prefWidth="216.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="notebook" layoutX="212.0" layoutY="329.0" onAction="#notebook" prefHeight="243.0" prefWidth="214.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="tablet" layoutX="436.0" layoutY="338.0" onAction="#tablet" prefHeight="239.0" prefWidth="220.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="estabilizador" layoutX="654.0" layoutY="323.0" onAction="#estabilizador" prefHeight="251.0" prefWidth="216.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="zenfone" layoutX="880.0" layoutY="309.0" onAction="#zenfone" prefHeight="265.0" prefWidth="212.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="iphone" layoutX="1103.0" layoutY="314.0" onAction="#iphone" prefHeight="253.0" prefWidth="236.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="tablet" layoutX="-1.0" layoutY="137.0" onAction="#tablet" prefHeight="141.0" prefWidth="1354.0" style="-fx-text-fill: transparent;" text="Button" />
+      <JFXButton fx:id="tablet" layoutY="590.0" onAction="#tablet" prefHeight="107.0" prefWidth="1354.0" style="-fx-text-fill: transparent;" text="Button" />
    </children>
 </AnchorPane>
