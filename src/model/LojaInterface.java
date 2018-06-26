@@ -1,6 +1,8 @@
 package model;
 
 
+import controller.ClientController;
+
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
@@ -15,5 +17,7 @@ public interface LojaInterface extends Remote {
     public int getValue() throws RemoteException;
     public boolean removerEstoque(String nome, int quantidade) throws RemoteException;
     public Map<String, List<Produto>> getAfiliadas() throws RemoteException;
+    public void Add(ClientInterface client) throws RemoteException;
+    public void Remove(ClientInterface client) throws RemoteException;
 
     }

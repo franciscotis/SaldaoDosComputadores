@@ -36,11 +36,18 @@ public class ClientController implements  Serializable{ // CLIENT
         this.lojas.add(new Client("Mexicanas")); //Mexicanas
         this.lojas.add(new Client("Amazonas")); // Amazonas
         this.lojas.add(new Client("Mazza")); // Mazza
+
+        LojaInterface loja = (LojaInterface) Naming.lookup("rmi://"+ClientController.getIps()+":5099/loja");
+        loja.Add(this.lojas.get(0));
+        loja.Add(this.lojas.get(1));
+        loja.Add(this.lojas.get(2));
+        /*
         Registry registry = LocateRegistry.createRegistry(5098);
         registry.bind("Mexicanas",this.lojas.get(0));//Mexicanas
         registry.bind("Amazonas",this.lojas.get(1)); //Amazonas
         registry.bind("Mazza",this.lojas.get(2)); //Mazza
 
+*/
         readFile("Mexicanas.csv",this.lojas.get(0));
         readFile("Amazonas.csv",this.lojas.get(1));
         readFile("Mazza.csv",this.lojas.get(2));
@@ -135,9 +142,17 @@ public class ClientController implements  Serializable{ // CLIENT
 
     }
 
+    public void sair() throws RemoteException, MalformedURLException, NotBoundException {
+        LojaInterface loja = (LojaInterface) Naming.lookup("rmi://localhost:5099/loja");
+
+        loja.Remove(this.lojas.get(0));
+        loja.Remove(this.lojas.get(1));
+        loja.Remove(this.lojas.get(2));
+    }
+
     private void readIP() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("ipconfig.txt")));
-        String linha = null;
+        String linha = "";
         while((linha = reader.readLine())!=null){
             this.ip=linha.trim();
             break;
@@ -148,7 +163,7 @@ public class ClientController implements  Serializable{ // CLIENT
 
     private void readIPServer() throws IOException{
         BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("ipconfigserver.txt")));
-        String linha = null;
+        String linha = "";
         while((linha = reader.readLine())!=null){
             ips=linha.trim();
             break;

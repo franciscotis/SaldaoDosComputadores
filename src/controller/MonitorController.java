@@ -51,10 +51,15 @@ public class MonitorController implements Initializable {
     public void removerItem(ActionEvent event) throws IOException, NotBoundException, AlreadyBoundException {
         System.out.println(ClientController.getIp());
         LojaInterface loja = (LojaInterface) Naming.lookup("rmi://"+ClientController.getIps()+":5099/loja");
-        loja.removerItem("Monitor",this.qtd.getValue());
+        boolean res = loja.removerItem("Monitor",this.qtd.getValue());
         for(Client cl : ClientController.getInstance().getLojas() ){
             if(cl.getNome().equals(ClientController.getInstance().getCurrentStore())){
                 this.disponibilidade.setText(cl.getQuantidade("Monitor")+ " itens no estoque!");
+                if(!res){
+                    TelaController.exibirJanela(Alert.AlertType.ERROR, "Alerta de Erro", "Erro!", "Não tem produto no estoque");
+                }
+                else
+                    TelaController.exibirJanela(Alert.AlertType.ERROR, "Alerta de SUCESSO!", "Erro!", "Compra realizada com sucesso!");
 
             }
         }

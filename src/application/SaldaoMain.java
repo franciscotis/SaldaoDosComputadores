@@ -18,6 +18,7 @@ public class SaldaoMain extends Application {
             primaryStage.setTitle("UESCAPÉ");
                 primaryStage.show();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println(e.getStackTrace());
         }
     }

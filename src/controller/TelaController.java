@@ -69,6 +69,7 @@ public class TelaController {
             ClientController.getInstance().writeFile("Mexicanas");
             ClientController.getInstance().writeFile("Amazonas");
             ClientController.getInstance().writeFile("Mazza");
+            ClientController.getInstance().sair();
             Platform.exit();
             System.exit(0);
 

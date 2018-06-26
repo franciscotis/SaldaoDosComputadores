@@ -17,6 +17,8 @@ public class Loja extends UnicastRemoteObject implements LojaInterface, Serializ
     private Map<String,List<Produto>> afiliadas;
     int qtd = 100;
 
+    private ArrayList<ClientInterface> clients;
+
 
     protected Loja() throws RemoteException, MalformedURLException, NotBoundException {
         super();
@@ -28,6 +30,7 @@ public class Loja extends UnicastRemoteObject implements LojaInterface, Serializ
         this.produtos.add(new Produto("Zenfone",10));
         this.produtos.add(new Produto("Estabilizador",10));
         this.afiliadas = new HashMap<>();
+        this.clients = new ArrayList<ClientInterface>();
         this.addAfiliadas("Amazonas");
         this.addAfiliadas("Mazza");
         this.addAfiliadas("Mexicanas");
@@ -66,12 +69,17 @@ public class Loja extends UnicastRemoteObject implements LojaInterface, Serializ
             for(Produto a : this.produtos){
                 if(a.getNome().equalsIgnoreCase(nome)){
                     if (a.getQuantidade() >= quantidade) {
+                        for(ClientInterface i : this.clients){
+                            i.removerItem(nome,quantidade);
+                        }
+                        /*
                         ClientInterface mexicanas = (ClientInterface) Naming.lookup("rmi://"+aa+":5098/Mexicanas");
                         ClientInterface amazonas = (ClientInterface) Naming.lookup("rmi://"+aa+":5098/Amazonas");
                         ClientInterface mazza = (ClientInterface) Naming.lookup("rmi://"+aa+":5098/Mazza");
                         mexicanas.removerItem(nome, quantidade);
                         mazza.removerItem(nome, quantidade);
                         amazonas.removerItem(nome, quantidade);
+                        */
                         this.removerEstoque(nome, (quantidade));
                         for(Map.Entry<String, List<Produto>> entry : this.afiliadas.entrySet()){
                                 for(Produto prod : entry.getValue()){
@@ -131,4 +139,15 @@ public class Loja extends UnicastRemoteObject implements LojaInterface, Serializ
     public int getQtd() {
         return qtd;
     }
+
+    public void Add(ClientInterface client) throws RemoteException{
+        clients.add(client);
+    }
+
+    @Override
+    public void Remove(ClientInterface client) throws RemoteException {
+        int index = this.clients.indexOf(client);
+        this.clients.remove(index);
+    }
+
 }
