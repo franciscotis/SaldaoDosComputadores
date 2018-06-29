@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Client;
 import model.Loja;
 import model.Servidor;
 
@@ -17,17 +18,24 @@ import java.io.*;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 
-public class TelaController {
+public class TelaController { //Método que realiza a troca de telas
     public static void carregarTela(ActionEvent evento, String nomeTela, String titulo) {
         if (evento != null) { // tem alguma tela para fechar antes
             Node telaAtual = (Node) evento.getSource();
-            telaAtual.getScene().getWindow().hide(); // fecha a tela atual antes de abrir a pr�xima
+            telaAtual.getScene().getWindow().hide(); // fecha a tela atual antes de abrir a próxima
         }
         try {
             FXMLLoader carregadorTela = new FXMLLoader(TelaController.class.getResource(nomeTela));
             Parent base = (Parent) carregadorTela.load();
             Scene cena = new Scene(base);
             Stage cenario = new Stage();
+            if(ClientController.getInstance().getCurrentStore().equals("Mexicanas"))
+                cenario.getIcons().add(new Image("/img/mexicanaslogo.png"));
+            else if(ClientController.getInstance().getCurrentStore().equals("Amazonas"))
+                cenario.getIcons().add(new Image("/img/amazonas.png"));
+            else
+                cenario.getIcons().add(new Image("/img/mazzalogo.png"));
+
             cenario.setResizable(false);
             //cenario.getIcons().add(new Image("/img/cactuslogo.png"));
             cenario.setOnCloseRequest(evt -> {
@@ -72,7 +80,6 @@ public class TelaController {
             ClientController.getInstance().sair();
             Platform.exit();
             System.exit(0);
-
         }
     }
 

@@ -35,7 +35,9 @@ public class MonitorController implements Initializable {
 
     @FXML
     private Spinner<Integer> qtd;
-    private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,5,0);
+    //Spinner contendo o valor que o cliente pode comprar
+
+    private SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10,0);
 
 
     @FXML
@@ -47,25 +49,26 @@ public class MonitorController implements Initializable {
     @FXML
     private JFXDrawer drawer;
 
+    //Método que irá chamar remotamente o método de removerItem do servidor
 
     public void removerItem(ActionEvent event) throws IOException, NotBoundException, AlreadyBoundException {
-        System.out.println(ClientController.getIp());
-        LojaInterface loja = (LojaInterface) Naming.lookup("rmi://"+ClientController.getIps()+":5099/loja");
-        boolean res = loja.removerItem("Monitor",this.qtd.getValue());
-        for(Client cl : ClientController.getInstance().getLojas() ){
+        TelaController.exibirJanela(Alert.AlertType.WARNING, "Espera", "Aguarde um momento!", "Compra sendo efetuada..."); //Mostra o alerta
+        LojaInterface loja = (LojaInterface) Naming.lookup("rmi://"+ClientController.getIps()+":5099/loja"); //Objeto Remoto
+        boolean res = loja.removerItem("Monitor",this.qtd.getValue()); //Chama o método de remover o item no servidor e armazena o resultado
+        for(Client cl : ClientController.getInstance().getLojas() ){ // Percorre as lojas
             if(cl.getNome().equals(ClientController.getInstance().getCurrentStore())){
-                this.disponibilidade.setText(cl.getQuantidade("Monitor")+ " itens no estoque!");
-                if(!res){
+                this.disponibilidade.setText(cl.getQuantidade("Monitor")+ " itens no estoque!"); //Modifica a quantidade total do produto
+                if(!res){ //Caso a compra não for realizada com sucesso
                     TelaController.exibirJanela(Alert.AlertType.ERROR, "Alerta de Erro", "Erro!", "Não tem produto no estoque");
                 }
-                else
-                    TelaController.exibirJanela(Alert.AlertType.ERROR, "Alerta de SUCESSO!", "Erro!", "Compra realizada com sucesso!");
+                else //Caso contrário
+                    TelaController.exibirJanela(Alert.AlertType.CONFIRMATION, "Alerta de SUCESSO!", "Sucesso!", "Compra realizada com sucesso!");
 
             }
         }
     }
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) { //Método "construtor" da tela
         this.qtd.setValueFactory(this.valueFactory);
         try {
             VBox box= FXMLLoader.load(getClass().getResource("/application/TelaVoltar.fxml"));

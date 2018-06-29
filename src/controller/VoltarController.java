@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 
-public class VoltarController {
+public class VoltarController { //Construtor da tela de voltar
 
     public void voltar(ActionEvent event) throws AlreadyBoundException, IOException, NotBoundException {
         switch(ClientController.getInstance().getCurrentStore()){

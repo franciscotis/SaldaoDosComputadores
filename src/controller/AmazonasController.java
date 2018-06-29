@@ -12,29 +12,11 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.util.ResourceBundle;
 
-public class AmazonasController implements Initializable {
+public class AmazonasController implements Initializable { //Controller da tela das lojas Amazonas
     public static final String titulo = "CASAS AMAZONAS";
 
-    @FXML
-    private JFXButton monitor;
-
-    @FXML
-    private JFXButton notebook;
-
-    @FXML
-    private JFXButton tablet;
-
-    @FXML
-    private JFXButton estabilizador;
-
-    @FXML
-    private JFXButton zenfone;
-
-    @FXML
-    private JFXButton iphone;
-
     @Override
-    public  void initialize(URL location, ResourceBundle resources) {
+    public  void initialize(URL location, ResourceBundle resources) { //"Contrutor" da tela do JavaFX
         try {
             ClientController cont = ClientController.getInstance();
             cont.setCurrentStore("Amazonas");
@@ -48,7 +30,7 @@ public class AmazonasController implements Initializable {
         }
 
     }
-
+ // A seguir estão as ações que acontecem quando o usuário clica em algum item
     public void monitor(ActionEvent event){
         TelaController.carregarTela(event, "/application/Monitor.fxml",
                 MonitorController.titulo);

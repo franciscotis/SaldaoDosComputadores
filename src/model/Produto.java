@@ -2,10 +2,11 @@ package model;
 
 import java.io.Serializable;
 
-public class Produto implements Serializable{
+public class Produto implements Serializable{ //Classe do produto
     private String nome;
     private int quantidade;
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; //versão da serialização
+
     public Produto(String nome, int quantidade) {
         this.nome = nome;
         this.quantidade = quantidade;

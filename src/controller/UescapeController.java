@@ -11,7 +11,7 @@ import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.util.ResourceBundle;
 
-public class UescapeController implements Initializable {
+public class UescapeController implements Initializable { //Controller da primeira página
     @FXML
     private JFXButton mexicanas;
 
@@ -21,6 +21,7 @@ public class UescapeController implements Initializable {
     @FXML
     private JFXButton amazonas;
 
+    //Ações dos botões
 
     public void mexicanas(ActionEvent event){
         TelaController.carregarTela(event, "/application/Mexicanas.fxml",
@@ -40,7 +41,7 @@ public class UescapeController implements Initializable {
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) { //Método "construtor"
         try {
             ClientController cont = ClientController.getInstance();
         } catch (AlreadyBoundException e) {

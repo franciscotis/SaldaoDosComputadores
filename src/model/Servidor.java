@@ -11,45 +11,52 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Servidor { // Servidor da loja principal - > Saldao Dos Computadores
-    private static Loja loja = null;
+    private static Loja loja = null; //Atributo do tipo Loja
+
+
     public static void main(String[] args) throws IOException, AlreadyBoundException, NotBoundException, ClassNotFoundException {
-        Scanner teclado = new Scanner(System.in);
-        Registry registry = LocateRegistry  .createRegistry(5099);
-        registry.bind("loja",getInstance());
-        Runtime.getRuntime().addShutdownHook(new Thread(() ->
+        Registry registry = LocateRegistry  .createRegistry(5099); //Registra no servidor RMI na porta t5099
+        registry.bind("loja",getInstance()); //Exporta o objeto loja para o servidor RMI
+        Scanner tc = new Scanner(System.in); //Teclado
+            if(tc.nextLine().equals("1")){ //Caso receba um input 1
+                System.exit(0); //Sai do programa
+            }
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> //Caso saia do proggrama
         {
             try {
-                serializar(loja);
+                serializar(loja); //Chama o método serializar
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }));
-        if(teclado.nextLine().equals("1")){
-            System.exit(0);
-        }
+
+
     }
 
-    public static Loja getInstance() throws IOException, NotBoundException, ClassNotFoundException {
-        if(loja==null){
+    public static Loja getInstance() throws IOException, NotBoundException, ClassNotFoundException { //Método que retorna instância da loja
+        if(loja==null){ //Caso loja seja igual a null
             try{
-            FileInputStream fileIn = new FileInputStream("loja.ser");
+            FileInputStream fileIn = new FileInputStream("loja.ser"); //Tenta deserializar o objeto
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            loja = (Loja) in.readObject();
+            loja = (Loja) in.readObject(); //Atribui loja ao objeto desserializado
             in.close();
             fileIn.close();
-                System.out.println("ok");}
-            catch(Exception e){
-                e.printStackTrace();
-                System.out.println("entrou aqui");
-                loja = new Loja();
+                System.out.println("Objeto Desserializado com sucesso!");}
+            catch(Exception e){ //Caso contrário
+                System.out.println("Novo objeto criado!");
+                loja = new Loja(); //instancia uma nova loja
+            }
+            finally{
+                System.out.println("SEVIDOR INICIADO!");
             }
         }
         return loja;
     }
-    public static void serializar(Loja e) throws IOException {
+    public static void serializar(Loja e) throws IOException { //Método que serializa o objeto
         FileOutputStream fileOut = new FileOutputStream("loja.ser");
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
-        out.writeObject(e);
+        out.writeObject(e); //Serializa o objeto
         out.close();
         fileOut.close();
     }
